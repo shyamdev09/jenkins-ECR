@@ -21,9 +21,9 @@ pipeline {
             stage('Pushing to ECR') {
              steps{  
                   script {
-               withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws_cred', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-    sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 617977097000.dkr.ecr.us-east-1.amazonaws.com'
-     sh 'docker push 617977097000.dkr.ecr.us-east-1.amazonaws.com/domo_ecr_repo:latest'
+                     withCredentials([<object of type com.cloudbees.jenkins.plugins.awscredentials.AmazonWebServicesCredentialsBinding>]) {
+            sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 617977097000.dkr.ecr.us-east-1.amazonaws.com'
+            sh 'docker push 617977097000.dkr.ecr.us-east-1.amazonaws.com/domo_ecr_repo:latest'
 }
 
 }
